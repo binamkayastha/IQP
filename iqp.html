@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="css.css">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+    <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+    <script src="http://tablesorter.com/__jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="js.js"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <h2 align="center">Matrix of Socioeconomic Impacts and Mitigation Efforts from Nuclear Power Plants Closures</h2>
+      <h3>
+      For more information about this project, visit our project website <a href="http://wp.wpi.edu/boston/projects/projects-2016/nuclear-plant-decommissioning-impacts-16/">here</a></h2>
+      Instructions: Click on the checkboxes that you are interested in comparing.
+      Click the headline to sort by alphabet or
+      <div id="checkboxes">
+        <div class="dropdown">
+          <button onclick="dropDownME(generalInfoDD)" class="dropbtn">
+          <input id="general" type="checkbox" name="general" onchange="checkAddress(this)">
+          <label>General Info v</label>
+          </button>
+          <div id="generalInfoDD" class="dropdown-content">
+            <input id="TownCity" type="checkbox" name="TownCity" onchange="checkAddress(this)">
+            <label for="TownCity">Town/City</label>
+            <input id="County" type="checkbox" name="County" onchange="checkAddress(this)">
+            <label for="County">County</label>
+            <input id="State" type="checkbox" name="State" onchange="checkAddress(this)">
+            <label for="State">State</label>
+            <input id="UtilityCompany" type="checkbox" name="UtilityCompany" onchange="checkAddress(this)">
+            <label for="UtilityCompany">Utility Company</label>
+            <input id="DateOfClosure" type="checkbox" name="DateOfClosure" onchange="checkAddress(this)">
+            <label for="DateOfClosure">Date of Closure</label>
+          </div>
+        </div>
+        <div class="bgdiv">
+          <input id="taxContrib" type="checkbox" name="taxContrib" onchange="checkAddress(this)">
+          <label for="taxContrib">Tax Contributions</label>
+        </div>
+        <div class="dropdown">
+          <button onclick="dropDownME(employeeDD)" class="dropbtn">Employees v</button>
+          <div id="employeeDD" class="dropdown-content">
+            <input id="employeeNum" type="checkbox" name="employeeNum" onchange="checkAddress(this)">
+            <label for="employeeNum">Employee Count</label>
+            <input id="EmployeesLeaving" type="checkbox" name="EmployeesLeaving" onchange="checkAddress(this)">
+            <label for="EmployeesLeaving">Employee Leaving</label>
+          </div>
+        </div>
+        <div class="bgdiv">
+          <input id="EconomicSpendingByEmployees" type="checkbox" name="EconomicSpendingByEmployees" onchange="checkAddress(this)">
+          <label for="EconomicSpendingByEmployees">Economic Spending By Employees</label>
+        </div>
+        <div class="bgdiv">
+          <input id="FinancialBurden" type="checkbox" name="FinancialBurden" onchange="checkAddress(this)">
+          <label for="FinancialBurden">Financial Burden</label>
+        </div>
+        <div class="bgdiv">
+          <input id="TaxesRaised" type="checkbox" name="TaxesRaised" onchange="checkAddress(this)">
+          <label for="TaxesRaised">Taxes Raised</label>
+        </div>
+        <div class="bgdiv">
+          <input id="MunicipalServices" type="checkbox" name="MunicipalServices" onchange="checkAddress(this)">
+          <label for="MunicipalServices">Municipal Services</label>
+        </div>
+        <div class="bgdiv">
+          <input id="Schools" type="checkbox" name="Schools" onchange="checkAddress(this)">
+          <label for="Schools">Schools</label>
+        </div>
+        <div class="bgdiv">
+          <input id="EconomicOutlook" type="checkbox" name="EconomicOutlook" onchange="checkAddress(this)">
+          <label for="EconomicOutlook">Economic Outlook</label>
+        </div>
+        <div class="bgdiv">
+          <input id="TownMorale" type="checkbox" name="TownMorale" onchange="checkAddress(this)">
+          <label for="TownMorale">Town Morale</label>
+        </div>
+        <div class="dropdown">
+          <button onclick="dropDownME(MitigationEffortsDD)" class="dropbtn">Mitigation Efforts v</button>
+          <div id="MitigationEffortsDD" class="dropdown-content">
+            <input id="HelpingEmployees" type="checkbox" name="HelpingEmployees" onchange="checkAddress(this)">
+            <label for="HelpingEmployees">Helping Employees</label>
+            <input id="ConductResearch" type="checkbox" name="ConductResearch" onchange="checkAddress(this)">
+            <label for="ConductResearch">Conduct Research</label>
+            <input id="CommunityEngagement" type="checkbox" name="CommunityEngagement" onchange="checkAddress(this)">
+            <label for="CommunityEngagement">Community Engagement</label>
+            <input id="LandReuse" type="checkbox" name="LandReuse" onchange="checkAddress(this)">
+            <label for="LandReuse">Land Reuse</label>
+            <input id="Others" type="checkbox" name="Others" onchange="checkAddress(this)">
+            <label for="Others">Others</label>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div style="overflow: scroll">
+        <table id="matrix" cellspacing="0" cellpadding="0">
+          <thead>
+            <tr>
+              <th>Power Plant</th>
+              <th>Town/City</th>
+              <th>County</th>
+              <th>State</th>
+              <th>Utility Company</th>
+              <th>Date of Closure (Link - All Sites Date of Closure)</th>
+              <th>Tax Contributions in Dollars (before Closure)</th>
+              <th>Tax Contributions in Percent (before Closure)</th>
+              <th>Tax Contributions in Dollars (after Closure)</th>
+              <th>Tax Contributions in Percent (after Closure)</th>
+              <th>Active Employees (before Closure)</th>
+              <th>Active Employees (after Closure)</th>
+              <th>Employees Leaving</th>
+              <th>Economic Spending By Employees</th>
+              <th>Financial Burden</th>
+              <th>Taxes Raised</th>
+              <th>Municipal Services</th>
+              <th>Schools</th>
+              <th>Economic Outlook (And Moody Ratings)</th>
+              <th>Town Morale</th>
+              <th>Mitigation Effort: Helping Employees</th>
+              <th>Conduct Research </th>
+              <th>Community Engagement</th>
+              <th>Land Reuse</th>
+              <th>Others</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <a target="_blank" href="MaineYankee.pdf">Maine Yankee Nuclear Power Plant</a>
+              </td>
+              <td>Wiscasset</td>
+              <td>Lincoln</td>
+              <td>Maine</td>
+              <td>Maine Atomic Power Company</td>
+              <td>December 6, 1996</td>
+              <td>$13 million</td>
+              <td>92.00%</td>
+              <td>$628,000</td>
+              <td>4.82%</td>
+              <td>476</td>
+              <td>317</td>
+              <td>
+                <a target="_blank" href="http://www.nytimes.com/1998/07/12/us/in-a-post-nuclear-town-some-adjustments-hurt.html?pagewanted=all&_r=0"> The most direct losses have fallen to the plant employees themselves. About 100 of those who left retired. In general, about 60% of those who found new jobs have moved away." MY 4</a>
+              </td>
+              <td>
+                <a target="_blank" href="http://www.nytimes.com/1998/07/12/us/in-a-post-nuclear-town-some-adjustments-hurt.html?pagewanted=all&_r=0"> For Wiscasset and the surrounding area, the economic losses include not only jobs but the money that employees would have spent locally, along with the occasional influx of hundreds of contractors when the plant was preparing to restart and its purchases of incidentals like office supplies. "There's a huge ripple effect" - Marge Kilkelly New York Times MY 4</a><br>
+                <a target="_blank" href="http://plymouth.wickedlocal.com/article/20150528/NEWS/150527386"> Average salary was $54,000 with a total payroll of roughly $30,000,000 MY 5</a>
+              </td>
+              <td>
+                <a target="_blank" href="https://www.bostonglobe.com/metro/2013/09/17/nuclear-plant-closes-and-town-feels-pain-for-years-afterward/a09EcMFb69AcLMzOxa9PcL/story.html"> Number living in poverty has more than doubled MY 1</a><br>
+                <a target="_blank" href="https://www.bostonglobe.com/metro/2013/09/17/nuclear-plant-closes-and-town-feels-pain-for-years-afterward/a09EcMFb69AcLMzOxa9PcL/story.html"> Wiscasset is ranked as the fourth poorest community in Maine. MY 1</a><br>
+                <a target="_blank" href="https://www.bostonglobe.com/metro/2013/09/17/nuclear-plant-closes-and-town-feels-pain-for-years-afterward/a09EcMFb69AcLMzOxa9PcL/story.html"> "It's now a real struggle for a lot of families to pay their taxes. People still want all the amenities, but are finding it very hard to pay for them." - Selectwoman Judy Colby MY 1</a><br>
+                <a target="_blank" href="https://www.bostonglobe.com/metro/2013/09/17/nuclear-plant-closes-and-town-feels-pain-for-years-afterward/a09EcMFb69AcLMzOxa9PcL/story.html">"I have yet to meet anyone happy that Maine Yankee is gone. All these years later we're still feeling the loss of jobs, the economic downturn, and the huge tax increases." - Laurie Smith, town manager MY 1<br>
+                <a target="_blank" href="http://www.wcax.com/story/23279547/lessons-learned-from-the-shutdown-of-maine-yankee"> Unlike the Vermont [Yankee], all the tax money from Maine Yankee went to Wiscasset and wasn't shared with the state. MY 7</a><br>
+                <a target="_blank" href="http://www.wcax.com/story/23279547/lessons-learned-from-the-shutdown-of-maine-yankee"> It's been more than a decade since Maine Yankee stopped producing power along the East Coast, but the effect of the closure can still be felt, as "For Sale" signs dot the village roads of Wiscasset. MY 7</a><br>
+                <a target="_blank" href="https://www.bostonglobe.com/metro/2013/09/17/nuclear-plant-closes-and-town-feels-pain-for-years-afterward/a09EcMFb69AcLMzOxa9PcL/story.html"> The residents of Vernon now face mass unemployment and the loss of about half the town's tax revenues. MY 1</a>
+              </td>
+              <td>
+                <a target="_blank" href="https://www.bostonglobe.com/metro/2013/09/17/nuclear-plant-closes-and-town-feels-pain-for-years-afterward/a09EcMFb69AcLMzOxa9PcL/story.html">Property taxes have spiked by more than 10 times for the town's 3,700 residents MY 1</a>
+              </td>
+              <td>
+                <a target="_blank" href="https://www.bostonglobe.com/metro/2013/09/17/nuclear-plant-closes-and-town-feels-pain-for-years-afterward/a09EcMFb69AcLMzOxa9PcL/story.html">Sewer and utility services are no longer free and residents reminisce about how they once indulged in amenities such as a ladder truck for their fire department. MY 1</a><br>
+                <a target="_blank" href="https://www.bostonglobe.com/metro/2013/09/17/nuclear-plant-closes-and-town-feels-pain-for-years-afterward/a09EcMFb69AcLMzOxa9PcL/story.html">Many of her [Sue Thompson, resident entire life] friends left towns for jobs elsewhere and she complains about the high cost of trash pickup, which used to be free, and the lack of public works staff to shovel sidewalks MY 1</a>
+              </td>
+              <td>
+                <a target="_blank" href="https://www.bostonglobe.com/metro/2013/09/17/nuclear-plant-closes-and-town-feels-pain-for-years-afterward/a09EcMFb69AcLMzOxa9PcL/story.html">The town lacks money to repair leaky windows and roofs in school buildings. The high school has fewer than half the students it had two decades ago and about 50% of them rely on subsidized lunches. MY 1<br>
+                <a target="_blank" href="https://www.bostonglobe.com/metro/2013/09/17/nuclear-plant-closes-and-town-feels-pain-for-years-afterward/a09EcMFb69AcLMzOxa9PcL/story.html">The high school has fewer than half the students it had two decades ago and about 50% of them rely on subsidized lunches. MY 1</a><br>
+                <a target="_blank" href="https://www.bostonglobe.com/metro/2013/09/17/nuclear-plant-closes-and-town-feels-pain-for-years-afterward/a09EcMFb69AcLMzOxa9PcL/story.html">Ashley Dowdy, a 25 year old woman who grew up in Wiscasset remembers using outdated textbooks and how the high school sports program went from upgrading equipment and uniforms every year to abandoning many of its teams. MY 1</a><br>
+                <a target="_blank" href="https://www.bostonglobe.com/metro/2013/09/17/nuclear-plant-closes-and-town-feels-pain-for-years-afterward/a09EcMFb69AcLMzOxa9PcL/story.html">"We're an entirely different school and community than we were in the time of Maine Yankee. We have a student population with greater need and we have less ability to meet that need." -Deb Taylor MY 1</a><br>
+                <a target="_blank" href="https://www.bostonglobe.com/metro/2013/09/17/nuclear-plant-closes-and-town-feels-pain-for-years-afterward/a09EcMFb69AcLMzOxa9PcL/story.html">High school principal Deb Taylor remembered when teachers routinely took students on field trips and the staff had generous health insurance. Now, trips are rare and the school requires teachers to take their spouse's health insurance MY1</a><br>
+                <a target="_blank" href="http://plymouth.wickedlocal.com/article/20150528/NEWS/150527386">After sustaining revenue limitation has taken a toll on the town, causing it to restructure its priorities. In late 2013, Wiscasset voters chose to withdraw from the school district, by a more than two-to-one margin. MY5</a><br>
+                <a target="_blank" href="http://www.wcax.com/story/23279547/lessons-learned-from-the-shutdown-of-maine-yankee">Each year progressively the town and the schools have tried to cut budgets where they can. MY 7</a>
+              </td>
+              <td>
+                <a target="_blank" href="http://plymouth.wickedlocal.com/article/20150528/NEWS/150527386">More than 15 years later, Wiscasset is still a community struggling with the legacy of a short prosperous era cut short. MY 5</a>
+              </td>
+              <td>
+                <a target="_blank" href="https://www.bostonglobe.com/metro/2013/09/17/nuclear-plant-closes-and-town-feels-pain-for-years-afterward/a09EcMFb69AcLMzOxa9PcL/story.html">"I wish Maine Yankee never came here. We went from having anything we wanted to having nothing, like going from being spoiled to having no parents. The closing really put a curtain on Wiscasset." - Tony True, 51, lived in Wiscasset most of his life. MY 1</a><br>
+                <a target="_blank" href="http://www.wcax.com/story/23279547/lessons-learned-from-the-shutdown-of-maine-yankee">"Maine Yankee really was all of Wiscasset's eggs right in one basket." -Selectwoman Pam Dunning MY 7</a>
+              </td>
+              <td>
+                <a target="_blank" href="http://www.nytimes.com/1998/07/12/us/in-a-post-nuclear-town-some-adjustments-hurt.html?pagewanted=all&_r=0">"The plant held 78 job fairs and hundreds of counseling sessions" - Maureen Brown, the plants spokesperson MY 4</a><br>
+                According to Eric Howes, the utility company held job fairs and helped employees make the transition to other jobs within the nuclear industry and elsewhere- Eric Howes Interview <br>
+                <a target="_blank" href="http://plymouth.wickedlocal.com/article/20150528/NEWS/150527386">Maine Yankee offered staff a severance and early retirement program, awarding staff who remained on the project until their termination two weeks of pay every year of service to the plant. MY 5</a><br>
+                <a target="_blank" href="http://www-pub.iaea.org/MTCD/publications/PDF/Pub1299_web.pdf">Developed a de-staffing plan that retained needed workers MY 9</a><br>
+                It wasn't what anyone wanted but Maine Yankee put in place a good process that helped people make the transition" Eric Howes Interview
+              </td>
+              <td>N/A
+              </td>
+              <td>
+                <a target="_blank" href="http://www.meredithangwin.com/yankee_decommissioning.pdf">"The stakeholders we worked with included our employees, contractors, board of directors, regulators, elected officials, media, and the public." -Wayne A. Norton (president of Maine Yankee decommissioning) MY 2</a><br>
+                <a target="_blank" href="http://www.meredithangwin.com/yankee_decommissioning.pdf">"In dealing with public and media communications we found community advisory panels to be particularly effective. Sponsored by companies, but made of credible community leaders." - Wayne A. Norton (president of Maine Yankee decommissioning)  MY2</a><br>
+                <a target="_blank" href="http://www.maineyankee.com/public/pdfs/epri/my%20epri%20report-2005.pdf">If you have an engineer who can discuss technical issues in a manner people can understand and can provide answers, it is a great asset toward moving community opinion. MY8</a><br>
+                <a target="_blank" href="http://www.maineyankee.com/public/pdfs/epri/my%20epri%20report-2005.pdf">If you initiate a program similar to CAP, it is essential that top management accept, or buy into the program in order for the organization to give it the appropriate level of attention. MY8</a><br>
+                <a target="_blank" href="http://www.maineyankee.com/public/pdfs/epri/my%20epri%20report-2005.pdf">The CAP provided an effective vehicle to obtain community and stakeholder input and to provide to Maine Yankee a means to communicate a consistent message to a diverse group. MY8</a><br>
+                <a target="_blank" href="http://www.maineyankee.com/public/pdfs/epri/my%20epri%20report-2005.pdf">If a company is considering a CAP or its equivalent, it must understand and accept the level of effort needed to keep it going. When the Maine Yankee CAP was started, the "care and feeding of CAP" was essentially a full time position for one person. A substantial effort was made in the first two years in order to build the trust and credibility needed for success. In addition to the staff support, Maine Yankee budgeted for the travel and education opportunities provided to the CAP members as well as the dinners provided prior to each CAP meeting. Nominally, this was approximately $20,000 per year, but was viewed by Maine Yankee as providing real value for the funds and effort expended. MY 8</a><br>
+                The panel was considered effective by former CAP Chair Marge Kilkelly and long time CAP staff person Eric Howes both of whom we interviewed.. The pair said that one of the hallmarks of the panel's success was the fact that it is still functioning today, 20 years after closure. Eric Howes Interview<br>
+                <a target="_blank" href="http://www.maineyankee.com/public/pdfs/epri/my%20epri%20report-2005.pdf">The only times when public participation was high was when there were issues that directly affected them. MY8</a><br>
+                <a target="_blank" href="http://www.wcax.com/story/23279547/lessons-learned-from-the-shutdown-of-maine-yankee">"It's not perfect, but we were involved every step of the way". - Ray Shadis, an Anti-nuclear advocate MY 7</a><br>
+                The panel was created prior to a decision about the shutdown because it "made sense to have a panel as a vehicle for stakeholder engagement" (Howes, 2016)
+              </td>
+              <td>N/A
+              </td>
+              <td>
+                <a target="_blank" href="http://www.wcax.com/story/23279547/lessons-learned-from-the-shutdown-of-maine-yankee">Selectwoman Dunning says she wants to continue recharging the tax base by focusing on small business to prevent the next boom from going bust. MY 7</a><br>
+                Consultant hired to provide economic re-development strategy MY 5
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a target="_blank" href="CrystalRiver.pdf">Crystal River 3 Nuclear Power Plant</a>
+              </td>
+              <td>Crystal River</td>
+              <td>Citrus</td>
+              <td>Florida</td>
+              <td>Duke Energy</td>
+              <td>September, 2009</td>
+              <td>$35 million</td>
+              <td>25.00%</td>
+              <td>$13.5 million</td>
+              <td>8.00%</td>
+              <td>~600</td>
+              <td>~200
+              </td>
+              <td>
+                <a target="_blank" href="http://www.tampabay.com/news/business/energy/duke-energy-announces-closing-of-crystal-river-nuclear-power-plant/1273794">"There's people I know out there who have never worked anywhere but there. What are they going to do?" - Dave Finley, 64, former worker, CR 3</a><br>
+                <a target="_blank" href="http://www.tampabay.com/news/business/energy/fallout-from-crystal-river-nuclear-plants-closure-devastates-citrus-county/1273833">"School superintendent said many of the district's employees have spouses that work at the plant, heightening worries over people leaving for new careers." - Sandra Himmel CR 4</a><br>
+                <a target="_blank" href="http://www.tampabay.com/news/business/energy/duke-energy-announces-closing-of-crystal-river-nuclear-power-plant/1273794">About 200 of the 600 workers at the plant will stay for one to four years to help maintain the facility. CR3</a><br>
+                <a target="_blank" href="http://www.reuters.com/article/uk-usa-florida-manatees-idUSLNE91D02920130214">Crystal River Mayor Jim Farley acknowledged that the county as a whole might take a hit should many employees be reassigned out-of-state and if property tax income drops if Duke does not replace the nuclear facility with a natural gas plant. CR 7</a>
+              </td>
+              <td>
+                <a target="_blank" href="http://www.npr.org/2013/02/14/172020709/taxpayers-steaming-over-florida-nuclear-plants-shuttering">Bubba Keller's  restaurant, Fat Boy's Bar-BQ,  depended on regular takeout orders from the several hundred people who worked at the plant, since the 1970s. But those days are gone. -CR2</a><br>
+                <a target="_blank" href="http://www.tampabay.com/news/business/energy/fallout-from-crystal-river-nuclear-plants-closure-devastates-citrus-county/1273833"> Gone for now are the small armies of laborers, operators, and engineers that provided the kind of funding small business needs to survive. -CR4</a>
+              </td>
+              <td>
+                <a target="_blank" href="http://www.npr.org/2013/02/14/172020709/taxpayers-steaming-over-florida-nuclear-plants-shuttering">"It's likely that the energy company will be paying even less in taxes and that the county's residents will have to pay more." - Joe Meek, chairman of Citrus County Commission CR 2</a><br>
+                <a target="_blank" href="http://www.tampabay.com/news/business/energy/fallout-from-crystal-river-nuclear-plants-closure-devastates-citrus-county/1273833">Leaders worried losing the core of the county's biggest employer and taxpayer could lay waste to the local tax base. CR 4<br>
+                <a target="_blank" href="http://www.npr.org/2013/02/14/172020709/taxpayers-steaming-over-florida-nuclear-plants-shuttering">"The bottom line: There will be a bigger burden on the taxpayers who are here. Our community is primarily a retirement community. We pride ourselves with having a low cost of living. And so we're going to have to balance all those things. But we're going to do it. "- Joe Meek CR2</a><br>
+                <a target="_blank" href="http://www.tampabay.com/news/business/energy/duke-energy-announces-closing-of-crystal-river-nuclear-power-plant/1273794">"It shouldn't be the ratepayers paying for something that many of them will never benefit from. It should be the stockholders" Mike Fasano, state  legislator, CR2</a><br>
+                <a target="_blank" href="http://www.tampabay.com/news/business/energy/duke-energy-announces-closing-of-crystal-river-nuclear-power-plant/1273794"> "All told, customers bank accounts are emptier, and their wallets are lighter, while the utility will pocket huge sums of money that doubtfully" -Mike Fasano CR3</a>
+              </td>
+              <td>
+                <a target="_blank" href="http://www.sanluisobispo.com/news/local/article98548657.html">Property taxes raised by 31% - CR 8</a>
+              </td>
+              <td>
+                <a target="_blank" href="http://www.tampabay.com/news/business/energy/fallout-from-crystal-river-nuclear-plants-closure-devastates-citrus-county/1273833">The tax bill shortfall could have dire consequences for [...], safety, and public services in this expanse of forests and strip malls less than 80 miles north of Tampa CR 4</a><br>
+                <a target="_blank" href="http://www.tampabay.com/news/business/energy/fallout-from-crystal-river-nuclear-plants-closure-devastates-citrus-county/1273833">To close the shorftall, the county proposed closing libraries and community centers, [...] and paying less towards resurfacing roads. CR 4</a><br>
+                <a target="_blank" href="http://www.nrc.gov/docs/ML1231/ML12314A065.pdf">Potential socioeconomic impacts include increased demand for short-term housing, public services, and increased traffic in the region due to the temporary increase in the size of the workforce at Crystal River. CR5</a>
+              </td>
+              <td>
+                <a target="_blank" href="http://www.nrc.gov/docs/ML1231/ML12314A065.pdf">The tax bill shortfall could have dire consequences for schools [...]. CR 4</a><br>
+                <a target="_blank" href="http://www.tampabay.com/news/business/energy/fallout-from-crystal-river-nuclear-plants-closure-devastates-citrus-county/1273833">To close the shortfall, the county proposed [...] carving $8 million from school budgets CR 4</a><br>
+                <a target="_blank" href="http://www.tampabay.com/news/business/energy/duke-set-to-profit-again-off-crystal-river-nuclear-plant-fiasco/2160190">Citrus County suffers the loss of millions in lost tax revenue, threatening county and school budgets because the nuclear plant dropped in value. CR1</a>
+              </td>
+              <td>
+                <a target="_blank" href="http://www.tampabay.com/news/business/energy/nuclear-fallout-crystal-river-area-tops-nation-in-gdp-loss-after-plant/2246899">Homosassa metro area suffered a 7.5% loss in GDP in 2014, the worst decline among 382 metros.  CR 6</a><br>
+                <a target="_blank" href="http://www.tampabay.com/news/business/energy/fallout-from-crystal-river-nuclear-plants-closure-devastates-citrus-county/1273833">Josh Wooten at Chamber of Commerce worried about how the closure could have psychological effect on people looking to invest in Citrus in the future. CR4</a><br>
+                <a target="_blank" href="http://www.npr.org/2013/02/14/172020709/taxpayers-steaming-over-florida-nuclear-plants-shuttering">In regards to the closure, "It's definitely going to trickle down. I mean, if it hurts the economy anymore than it's already hurting. Because our biggest problem is our sales are down and that's primarily because our biggest clientele can't afford to go out and eat." Fat Boy's Bar-BQ restaurant owner Bubba Keller CR2</a><br>
+                <a target="_blank" href="http://www.npr.org/2013/02/14/172020709/taxpayers-steaming-over-florida-nuclear-plants-shuttering">For more than 40 years, the county's main economic engine was the nuclear plant. CR2</a>
+              </td>
+              <td>
+                <a target="_blank" href="http://www.tampabay.com/news/business/energy/fallout-from-crystal-river-nuclear-plants-closure-devastates-citrus-county/1273833">"It changes everything. We're in a new era. It's a wake up call for everyone who wants quality of life." -Brad Thorpe, County Administrator CR 4</a><br>
+                <a target="_blank" href="http://www.tampabay.com/news/business/energy/fallout-from-crystal-river-nuclear-plants-closure-devastates-citrus-county/1273833">"When you thought of Crystal River, you thought of the nuclear plant. It's hard not be depressed." -Andy Houston, City Manager, CR4</a><br>
+                <a target="_blank" href="http://www.tampabay.com/news/business/energy/fallout-from-crystal-river-nuclear-plants-closure-devastates-citrus-county/1273833">The shortfall could also chip away at the meager job offerings and unconventional identity this "company town" and the broader community built up and lived off for decades. CR 4</a><br>
+                <a target="_blank" href="http://www.tampabay.com/news/business/energy/duke-energy-announces-closing-of-crystal-river-nuclear-power-plant/1273794">"The lack of transparency during this ordeal, the promises not kept and the false hopes all are dashed with today's announcement" State legislator, Mike Fasano -CR3</a>
+              </td>
+              <td>
+                <a target="_blank" href="http://www.tampabay.com/news/business/energy/duke-energy-announces-closing-of-crystal-river-nuclear-power-plant/1273794">"We are working to place as many employees affected by the announcement in other positions within the company." -Glenn, President of Duke subsidiary Progress Energy Florida, R3</a>
+              </td>
+              <td>Had formal and informal research performed, which showed that a Community Advisory Panel was something which the community did not want. Interview with Heather DanenhowerCR</td>
+              <td>Held many breakfasts with the community to see how people wanted to receive information - Interview with Heather Danenhower CR<br>
+                Multi-channel (email, announcements, luncheons, etc) communication was the best approach - Inteview with Heather Danenhower CR<br>
+                <a target="_blank" href="http://www.tampabay.com/news/business/energy/duke-set-to-profit-again-off-crystal-river-nuclear-plant-fiasco/2160190">Utility company has scheduled a public "open house" to answer questions about the decommissioning process. CR 1</a>
+              </td>
+              <td>N/A
+              </td>
+              <td>
+                <a target="_blank" href="http://www.tampabay.com/news/business/energy/duke-energy-announces-closing-of-crystal-river-nuclear-power-plant/1273794">"We are committed to working with Citrus County to lessen the affects as much as possible." -Glenn, President of Duke subsidiary Progress Energy Florida, CR3</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a target="_blank" href="Zion.pdf">Zion Nuclear Power Station</a>
+              </td>
+              <td>Zion</td>
+              <td>Lake</td>
+              <td>Illinois</td>
+              <td>Zion Solutions</td>
+              <td>September 19, 1996 & February 2, 1997</td>
+              <td>$19.6 million</td>
+              <td>55.00%</td>
+              <td>$1.5 million</td>
+              <td>4.20%</td>
+              <td>~800</td>
+              <td>~120</td>
+              <td>N/A</td>
+              <td>N/A
+              </td>
+              <td>
+                <a target="_blank" href="http://www.chicagotribune.com/business/ct-zion-plant-111-biz-20150109-story.html">Since the Zion plant was deactivated in 1998, the town has struggled to make up for the taxes that were lost. It paid millions while operating but now virtually nothing. ZN 1</a><br>
+                <a target="_blank" href="http://www.sanluisobispo.com/news/local/article86054762.html">Nearly 20 years after the shutdown, Zion's finance director describes the local economy in a single word: struggling. We've lost about $18 million communitywide. That tax burden got shifted to residents and businesses. ZN 2</a><br>
+                <a target="_blank" href="http://www.sanluisobispo.com/news/local/article86054762.html">"We've lost about $18 million communitywide. That tax burden got shifted to residents and businesses." - David Knabel ZN2</a>
+              </td>
+              <td>
+                <a target="_blank" href="http://www.sanluisobispo.com/news/local/article86054762.html">Property tax rates rose by 143% - ZN 2 </a>
+              </td>
+              <td>N/A</td>
+              <td>N/A
+              </td>
+              <td>
+                <a target="_blank" href="http://www.sanluisobispo.com/news/local/article86054762.html">"With the tax rate going through the roof, who wants to buy a house or bring business in?" - David Knabel ZN2<br>
+                <a target="_blank" href="http://www.municipalbonds.com/bonds/moodys_report/23791/">Moody downgrades to Baa1 from Aa3 for Zion District - ZN 6</a><br>
+                <a onclick='$("#MoodyZN").dialog("open"); return false;' href=""><strong>Moody Rating Reports on Zion Plant</strong></a>
+                <div class="dialog" id="MoodyZN" title="Moody Ratings for Zion" hidden="hidden">
+                  <table class="moody">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Rating</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>April 13, 2011</td>
+                        <td>Baa2</td>
+                        <td>Moody's assigns initial Baa2 rating to the City of Zion's (IL) $7.5 Million general obligation limited tax debt -"Above average debt burden" "Additionally, a decommissioned nuclear power facility within city limits is in the midst of a ten-year teardown project."</td>
+                      </tr>
+                      <tr>
+                        <td>December 9, 2011</td>
+                        <td>Aa3</td>
+                        <td>Moody's assigns Aa3 rating to Zion Park District's (IL) $1.5M GO taxable limited tax park bonds - "The plant comprised a significant portion of assessed valuation at $219 million, or 52.13% of the district's tax base in 1998 when the plant closed, and has since declined to a minimal $13 million, or 3.3% of assessed valuation."</td>
+                      </tr>
+                      <tr>
+                        <td>March 8, 2013</td>
+                        <td>Baa1</td>
+                        <td>Moody's downgrades to Baa1 from Aa3 the rating on Zion Park District's (IL) - "Recent deterioration in property tax base"</td>
+                      </tr>
+                      <tr>
+                        <td>March 25, 2014</td>
+                        <td>Baa3</td>
+                        <td>Moody's downgrades Zion Park District, IL's GO to Baa3 and GOLT debt certificates to Ba1; negative outlook assigned - "Below average socioeconomic traits with a high unemployment rate" "Recent major declines in tax base valuations have pushed tax rates closer to an absolute cap"</td>
+                      </tr>
+                      <tr>
+                        <td>March 23, 2015</td>
+                        <td>Ba1</td>
+                        <td>Moody's downgrades Zion Park District, IL's GO to Ba1 from Baa3; outlook negative - "The negative outlook reflects our expectation that the district's finances will remain limited, requiring regular borrowing to pay debt service on existing debt, as well as expectations for continued, material tax base declines."</td>
+                      </tr>
+                      <tr>
+                        <td colspan="3">Source: <a href="http://www.municipalbonds.com">www.municipalbonds.com</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+              <td>
+                <a target="_blank" href="http://www.chicagotribune.com/business/ct-zion-plant-111-biz-20150109-story.html">Residents in Zion who learned of the shortfall of EnergySolutions at a December community meeting were alarmed about the possibility of getting stuck with a scarred lakefront. ZN 1</a>
+              </td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>"Every once in awhile, you would get a curious random person join in, but after finding out what we were talking about, they usually wouldn't return" (Paxton, 2016).
+              </td>
+              <td>
+                <a target="_blank" href="http://www.chicagotribune.com/business/ct-zion-plant-111-biz-20150109-story.html">"We want the lakefront to be a point of attraction, to bring visitors, to try as much as possible to make it a showpiece for the area." Christopher Fischer, Zion city commissioner -ZN 1</a>
+              </td>
+              <td>Tax contributions were ramped down over a 5 year period, and the effects were felt on the tax bodies after this period (Interview with Dr. Brent Paxton)<br>
+                <a target="_blank" href="https://www.congress.gov/bill/114th-congress/house-bill/5632">Payments of "$15 per kilogram of spent nuclear fuel stored at the eligible civilian nuclear power plant that is located within the jurisdictional boundaries of such unit of general local government." - ​(The Stranded Nuclear Waste Accountability Act) ZN 4</a><br>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a target="_black" href="Kewaunee.pdf">Kewaunee Power Station</a>
+              </td>
+              <td>Carlton</td>
+              <td>Kewaunee</td>
+              <td>Wisconsin</td>
+              <td>Dominion Energy Solutions</td>
+              <td>May 7, 2013</td>
+              <td>$370,000</td>
+              <td>71.84%</td>
+              <td>Lowering annually</td>
+              <td>Lowering annually</td>
+              <td>~550</td>
+              <td>N/A
+              </td>
+              <td>
+                <a target="_blank" href="http://www.energycentral.com/news/nuclear-plants-closure-leaves-wisconsin-town-fighting-its-life">"The exodus of workers increased the number of houses on the market, lowering property values." - Energy Central KE 4</a><br>
+                <a target="_blank" href="http://www.nytimes.com/2015/08/12/us/rural-wisconsin-community-laments-nuclear-power-plants-closure.html">"The plant's 550 or so employees were invited to apply for jobs elsewhere in the company." -Richard Repshas, spokesman for Dominion, KE 1</a><br>
+                <a target="_blank" href="http://herald-review.com/news/local/govt-and-politics/wisconsin-nuclear-plant-offers-view-of-closure/article_9cd61931-efab-5c68-a652-0f20b1f67300.html">"Many workers did not want to leave Wisconsin." -Richard Zuercher, manager of Dominion nuclear fleet KE 2</a>
+              </td>
+              <td>
+                <a target="_blank" href="http://www.energycentral.com/news/nuclear-plants-closure-leaves-wisconsin-town-fighting-its-life">"The company's payroll was $54 million per year; the highest paid employees earned more than $100,000 per year. Those dollars cycled through the community, creating more jobs." - Energy Central KE 4</a><br>
+                <a target="_blank" href="http://herald-review.com/news/local/govt-and-politics/wisconsin-nuclear-plant-offers-view-of-closure/article_9cd61931-efab-5c68-a652-0f20b1f67300.html">And I don't know any way of replacing the jobs. They were some of the highest-paying jobs in the county." Ron Heuer, former chairman of the Kewaunee County Board-KE2</a><br>
+                <a target="_blank" href="http://www.energycentral.com/news/nuclear-plants-closure-leaves-wisconsin-town-fighting-its-life">
+                  "The hospitality industry was affected too; temporary workers hired for refuelings were no longer renting rooms or buying groceries or filling their cars with gas." -Energy Central KE 4
+              </td>
+              <td>
+              <a target="_blank" href="http://herald-review.com/news/local/govt-and-politics/wisconsin-nuclear-plant-offers-view-of-closure/article_9cd61931-efab-5c68-a652-0f20b1f67300.html">The abrupt shutdown of Kewaunee stunned local residents and created financial aftershocks that could cripple the community in NE Wisconsin for decades to come. KE2</a><br>
+              <a target="_blank" href="http://herald-review.com/news/local/govt-and-politics/wisconsin-nuclear-plant-offers-view-of-closure/article_9cd61931-efab-5c68-a652-0f20b1f67300.html">Utility taxes distributed roughly $750,000 to Kewaunee County and around $400,000 to Carlton annually. -KE4</a><br>
+              <a target="_blank" href="http://www.energycentral.com/news/nuclear-plants-closure-leaves-wisconsin-town-fighting-its-life">"Kewaunee County is considering a half-percent sales tax and a variety of fee increases, in addition to cost cutting measures." -Energy Central KE 4</a><br>
+              <a target="_blank" href="http://www.nytimes.com/2015/08/12/us/rural-wisconsin-community-laments-nuclear-power-plants-closure.html">"This is going to be a burden on the taxpayers in this county. You start cutting your roads, you cut expenses. You can't only raise taxes." Linda Sinkula, the town clerk -KE1</a><br>
+              <a target="_blank" href="http://archive.jsonline.com/business/a-457-million-difference-of-opinion-over-the-kewaunee-nuclear-plant-b99570612z1-324549561.html">"The town's valuation of Kewaunee 'puts every taxpayer in jeopardy because it could create a financial hardship for everyone." - Dan Stoddard, Dominion senior vice president, KE 3</a><br>
+              <a target="_blank" href="http://www.nytimes.com/2015/08/12/us/rural-wisconsin-community-laments-nuclear-power-plants-closure.html">"Local officials quickly realized they were facing a difficult financial situation" - Linda Sinkula, the town clerk KE1</a><br>
+              <a target="_blank" href="http://www.energycentral.com/news/nuclear-plants-closure-leaves-wisconsin-town-fighting-its-life">Now, the town is faced with bills for attorneys and assessors on top of everything else. It's a situation that never anticipated even five years ago. KE4</a><br>
+              <a target="_blank" href="http://www.energycentral.com/news/nuclear-plants-closure-leaves-wisconsin-town-fighting-its-life">The town of carlton doesn't have many options for raising revenue - aside from increasing the local property tax levied on homes and farms - and there aren't many costs that can be cut. KE4</a><br>
+              <a target="_blank" href="http://www.sanluisobispo.com/news/local/article98989752.html">"The way we were devastated was the income -- we no longer had the income levels" - Jennifer K. Brown, executive director of the Kewaunee County Economic Development Corporation KE 5</a><br>
+              <a target="_blank" href="http://www.nytimes.com/2015/08/12/us/rural-wisconsin-community-laments-nuclear-power-plants-closure.html">Such plants can be an economic engine for a town, but upon shut down, they can leave a community struggling to replace the jobs and tax revenues. KE 1</a></td>
+              <td>*Taxes currently decreasing due to switch from utility tax to property tax* - KE
+              </td>
+              <td>
+                <a target="_blank" href="http://kcedc.org/wp-content/uploads/2012/11/Nuclear-Plant-Closure-Summary-of-the-Situation.pdf">The City of Kewaunee receives $18000 annually from the NPP for fire protection KE 10</a><br>
+                <a target="_blank" href="http://www.energycentral.com/news/nuclear-plants-closure-leaves-wisconsin-town-fighting-its-life">Dominion stopped paying the utility taxes that had covered nearly all of Carlton's expenses for services such as road repair, snow removal, and emergency services. KE4</a>
+              </td>
+              <td>
+                <a target="_blank" href="http://www.nytimes.com/2015/08/12/us/rural-wisconsin-community-laments-nuclear-power-plants-closure.html">"How is the local government going to function? What about schools? Are they going to change the rules so they can raise taxes more? It's going to be a fight." -Steve Schleis, local farmer, KE1</a>
+              </td>
+              <td>
+                <a target="_blank" href="http://www.municipalbonds.com/bonds/moodys_report/28464/">Assigned A1 rating to Kewaunee County, citing loss of largest employer and $13.8 million in outstanding debt - KE 9<br>
+                <a target="_blank" href="http://www.energycentral.com/news/nuclear-plants-closure-leaves-wisconsin-town-fighting-its-life">Like other communities that lose a power plant, the transition was not smooth. the economy of the entire region suffered according to local leaders. -KE 4</a><br>
+                <a onclick='$("#MoodyKE").dialog("open"); return false;' href=""><strong>Moody Rating Reports on Kewaunee Plant</strong></a>
+                <div class="dialog" id="MoodyKE" title="Moody Ratings for KE" hidden="hidden">
+                  <table>
+                     <thead>
+                        <tr>
+                           <th>Date</th>
+                           <th>Rating</th>
+                           <th>Description</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td>"March 14, 2012</td>
+                           <td>A1</td>
+                           <td>"Moody's Investors Service has assigned a MIG1 rating to the Kewaunee County (WI) $4.5 million Note Anticipation Notes - "Concurrently, Moody's has affirmed the A1 rating on $13.8 million of outstanding general obligation debt."</td>
+                        </tr>
+                        <tr>
+                           <td>"November 16, 2012</td>
+                           <td>A1</td>
+                           <td>Moody'sassigns A1 rating to Kewaunee County's(WI) $4.5 million GO Refunding Bonds - "Despite the loss of the county's largest employer expected in 2013, the county's tax base will likely experience modest growth given ongoing agricultural development."</td>
+                        </tr>
+                        <tr>
+                           <td>"November 15, 2013</td>
+                           <td>A1</td>
+                           <td>Moody'sassigns A1 to Kewaunee County, WI's $2.3M GO Refunding Bonds - "Challenges: Loss of largest employer with the closure of Dominion Energy, Inc. nuclear power plant"</td>
+                        </tr>
+                        <tr>
+                           <td>"April 28, 2015</td>
+                           <td>A2</td>
+                           <td>Moody's downgrades Kewaunee County, WI's GO to A2 from A1; assigns negative outlook - "The A2 and negative outlook will affect $11 million of general obligation debt outstanding." "What Could Make The Rating Go Up: Significant increase in taxable valuations and socioeconomic indices"</td>
+                        </tr>
+                        <tr>
+                           <td colspan="3">Source: <a href="http://www.municipalbonds.com">www.municipalbonds.com</a></td>
+                        </tr>
+                     </tbody>
+                  </table>
+                </div>
+              </td>
+              <td>
+                <a target="_blank" href="http://www.nytimes.com/2015/08/12/us/rural-wisconsin-community-laments-nuclear-power-plants-closure.html">The shutdown has angered many people in this community, some of whom have lived alongside the Kewaunee plant since 1974. KE 1</a><br>
+                <a target="_blank" href="http://www.nytimes.com/2015/08/12/us/rural-wisconsin-community-laments-nuclear-power-plants-closure.html">What was once a companionable, mutually beneficial relationship between the community and the power plant has turn into a fight that some residents have likened to a nasty divorce. KE 1</a><br>
+                <a target="_blank" href="http://www.nytimes.com/2015/08/12/us/rural-wisconsin-community-laments-nuclear-power-plants-closure.html">There are a lot of bitter people here," said Allison Kruse, who lives in a gray-shingle house along Lake Michigan with her husband, who once worked at the plant. "It had been there for so long, and people did not see this coming. KE1</a>
+              </td>
+              <td>N/A
+              </td>
+              <td>
+                <a target="_blank" href="http://www.sanluisobispo.com/news/local/article98989752.html">The U.S. Department Of Labor awarded an emergency grant to help former Kewaunee plant employees find new jobs in 2013. KE 5</a><br>
+                <a target="_blank" href="http://cced.ces.uwex.edu/2014/02/04/community-impacts-of-a-nuclear-power-plant-closure/">To identify ways for these effects to be mitigated, the project involved conducting interviews of business owners along with focus groups with bankers, realtors, school district officials, and elected officials to discuss the closure process and its impact. KE 7</a>
+              </td>
+              <td>N/A
+              </td>
+              <td>
+                <a target="_blank" href="http://www.sanluisobispo.com/news/local/article98989752.html">The city of Kewaunee was awarded a $4.2 million state grant for a waterfront revitalization project. Jennifer Brown, Exec Director of Kewaunee Economic Development Committee believes it is directly related to the closure of the nuclear power plant. KE 5</a>
+              </td>
+              <td>
+                <a target="_blank" href="http://www.sanluisobispo.com/news/local/article98989752.html">"We want a national conference to gather communities. They must be made to realize more quickly that there's no solution out there for them right now. We need to achieve consensus among a critical mass of affected towns and regions on a new national approach." - Jennifer Stromsten, co-founder of East Cost-based INHC -KE5</a><br>
+                <a target="_blank" href="http://herald-review.com/news/local/govt-and-politics/wisconsin-nuclear-plant-offers-view-of-closure/article_9cd61931-efab-5c68-a652-0f20b1f67300.html">A win in court by Dominion could mean a much lower property value for the plant and a refund of the money from local taxpayers. KE2
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      *Base design credit for background goes to: Jake Rochelea
+    </div>
+  </body>
+</html>
